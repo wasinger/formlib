@@ -1,0 +1,54 @@
+elements:
+  name:
+    required: true
+  email:
+    type: email
+    label: E-Mail
+    required: true
+    attributes:
+      placeholder: "email@example.com"
+  days:
+    type: checkboxgroup
+    choices:
+      mon: Monday
+      tue: Tuesday
+      wed: Wednesday
+      thu: Thursday
+      fri: Friday
+  month:
+    type: select
+    choices: [January, February, March, April, May, June]
+    add_empty_choice: "Select month"
+    required: true
+  colors:
+    type: checkboxgroup
+    choices: [blue, red, yellow, green]
+    required: true
+  comment:
+    type: textarea
+    attributes:
+      cols: 80
+      rows: 10
+      style: "background-color: yellow;"
+      placeholder: "Your comment..."
+  agree:
+    type: radiogroup
+    label: Do you agree?
+    choices: [Yes, No, "Don't know"]
+    required: true
+  secret:
+    type: hidden
+    value: einverstecktesWort
+
+options:
+    mail:
+      to: [ singer@webagentur72.de ]
+      from: {apache@www.tuebingen.de: Homepage der Universitätsstadt Tübingen }
+      subject: Testformular
+      copy_to_sender: true
+      senderfield: email
+      text_pre: "Folgende Daten wurden übermittelt:\n\n"
+      text_post:
+      text_pre_sender: "Folgende Daten haben Sie über das Kontaktformular übermittelt:\n\n"
+      text_post_sender: "\n\nDies ist eine automatisch generierte Nachricht."
+
