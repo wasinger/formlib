@@ -1,5 +1,6 @@
 <?php
 namespace Wa72\Formlib;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * FormHandler handles a form through its complete lifecycle:
@@ -191,6 +192,7 @@ class FormHandler
                     break;
                 case 'checkbox':
                     $field = new FieldInputCheckbox($elname, $label, $value);
+                    if (isset($element['options']['unchecked_value'])) $field->setUncheckedValueForHumans($element['options']['unchecked_value']);
                     break;
                 case 'textarea':
                     $field = new FieldTextarea($elname, $label, $value);
@@ -274,6 +276,19 @@ class FormHandler
             if (file_exists($templatefile)) $configarray['templatefile'] = $templatefile;
         }
         return $this->createFormFromArray($name, $configarray);
+    }
+
+    public function createFromHtml($html)
+    {
+        $c = new Crawler($html);
+        $configarray = array();
+        $form = $c->selectButton($label_of_submitbutton)->form();
+        $formfields = $form->all();
+        foreach ($formfields as $formfield) {
+            if ($formfield instanceof \Symfony\Component\DomCrawler\Field\ChoiceFormField) {
+
+            }
+        }
     }
 
 }

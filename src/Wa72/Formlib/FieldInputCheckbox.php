@@ -5,6 +5,15 @@ class FieldInputCheckbox extends Field
 {
     protected $checked = false;
     protected $type = 'checkbox';
+    /**
+     * @var string
+     *
+     * A string that is returned by getData($for_humans) instead of NULL
+     * if the checkbox is not checked and $for_humans is true
+     *
+     * example: if $this->value is "yes" this could be set to "no"
+     */
+    protected $unchecked_value_for_humans = 'no';
 
     /**
      * @param string $name
@@ -34,7 +43,7 @@ class FieldInputCheckbox extends Field
     public function getData($for_humans = false)
     {
         if ($this->checked) return $this->value;
-        else return null;
+        else return ($for_humans ? $this->unchecked_value_for_humans : null);
     }
 
     public function validate()
@@ -66,9 +75,22 @@ class FieldInputCheckbox extends Field
         return $this;
     }
 
-    public function getChecked($checked)
+    public function getChecked()
     {
         return $this->checked;
+    }
+
+    /**
+     * Set a human readable string that is returned by getData($for_humans) instead of NULL
+     * if the checkbox is not checked and $for_humans is true
+     *
+     * example: if $this->value is "yes" this could be set to "no"
+     *
+     * @param string $unchecked_value_for_humans
+     */
+    public function setUncheckedValueForHumans($unchecked_value_for_humans)
+    {
+        $this->unchecked_value_for_humans = $unchecked_value_for_humans;
     }
 
     public function getWidget()
