@@ -42,8 +42,7 @@ elements:
 
 options:
     mail:
-      to: [ singer@webagentur72.de ]
-      from: {apache@www.tuebingen.de: Homepage der Universitätsstadt Tübingen }
+      to: [ email@example.com ]
       subject: Testformular
       copy_to_sender: true
       senderfield: email
