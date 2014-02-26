@@ -9,8 +9,8 @@ Yet another PHP library for creating and processing HTML forms (WIP).
 - It is intended for quick, configuration driven creation of contact forms that are sent by email. 
   It is not intended for creating editing forms for database records.
 
-- Forms can be defined by YAML configuration files (or by associative PHP arrays or any other format
-  that can be turned into a PHP array).
+- Forms can either be defined by YAML configuration files (or by associative PHP arrays or any other format
+  that can be turned into a PHP array) or programmatically using a fluent interface.
 
 - Forms are rendered either in a customizable generic way or by replacing the form elements in an
   HTML template containing the whole form.
