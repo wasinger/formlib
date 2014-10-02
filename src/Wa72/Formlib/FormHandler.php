@@ -66,6 +66,11 @@ class FormHandler
         $this->processors[] = $processor;
     }
 
+    public function getProcessors()
+    {
+        return $this->processors;
+    }
+
     /**
      * @return FormRendererGeneric
      */
