@@ -135,4 +135,12 @@ class FormprocessorSwiftmailer implements FormprocessorInterface
         return $s;
     }
 
+    /**
+     * @return FormprocessorMailConfiguration
+     */
+    public function getConfiguration()
+    {
+        return $this->configuration;
+    }
+
 }
