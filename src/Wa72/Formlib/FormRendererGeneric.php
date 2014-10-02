@@ -207,6 +207,12 @@ class FormRendererGeneric implements FormRendererReturningRenderedFormInterface
     {
         $widget = HtmlPageCrawler::create($show_data ? $field->getDataWidget() : $field->getWidget());
         $label = $field->getLabelElement() ? HtmlPageCrawler::create($field->getLabelElement()) : null;
+        /* If $show_data is true and the field is a hidden field with "include_in_data" set to true
+            it has no label, but should have one
+        */
+        if ($label == null && $show_data && $field->isHidden() && $field->getIncludeInData() == true) {
+            $label = HtmlPageCrawler::create(ucfirst($field->getName()));
+        }
         $errors = $field->getErrorMessages();
         if (count($errors)) {
             $errors = $this->renderFieldErrorMessages($errors);
