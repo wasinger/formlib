@@ -2,7 +2,7 @@
     "name": "wa72/formlib",
     "description": "A PHP library for creating and processing HTML forms",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": { "Wa72\\Formlib\\": "src/" }
     },
     "require": {
         "php": ">=5.3.6",
