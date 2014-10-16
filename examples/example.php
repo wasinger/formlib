@@ -8,7 +8,7 @@ $transport = new \Swift_SmtpTransport('your smtp server address');
 
 $mailer = new \Swift_Mailer($transport);
 
-$logger = new \Wa72SimpleLogger('/tmp/formlib.log'); // adjust to where you want to log to
+$logger = new \Wa72\SimpleLogger\FileLogger('/tmp/formlib.log'); // adjust to where you want to log to
 
 $fh = new FormHandler($logger, $mailer);
 

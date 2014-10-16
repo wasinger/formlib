@@ -11,7 +11,7 @@
         "symfony/yaml": "*",
         "wa72/htmlpagedom": "*@dev"
     },
-    "suggest": {
-        "wa72/simplelogger": "If there is no other PSR-3 compliant logger in your project"
+    "require-dev": {
+        "wa72/simplelogger": "dev-master"
     }
 }

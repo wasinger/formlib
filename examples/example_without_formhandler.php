@@ -39,22 +39,18 @@ $form->add(FieldInputCheckboxGroup::createInputCheckboxGroup('Wochentag', $tage)
 
 $form->add(FieldSelect::createSelect('monate', array('Januar', 'Februar', 'März', 'April'), 'bitte auswählen'));
 
+
+$renderer = new FormRendererGeneric();
+$renderer->setForm($form);
+
 if (isset($_REQUEST['testform'])) {
     $form->bind($_REQUEST);
     if ($form->isValid()) {
-        var_dump($form->getData(false));
-        var_dump($form->getData(true));
-        echo $form->getDomdocument()->saveHTML();
+        echo $renderer->renderResult();
         exit;
     }
 }
 
-$formdom = $form->getDomdocument();
-
-$submit = $formdom->createElement('input');
-$submit->setAttribute('type', 'submit');
-$formdom->appendChild($submit);
-
-echo $formdom->saveHTML();
+echo $renderer->renderForm();
 
 
