@@ -2,7 +2,7 @@
 namespace Wa72\Formlib\Field;
 
 
-class FieldInputCheckboxGroup extends Field
+class InputCheckboxGroup extends Field
 {
     protected $value = array();
     protected $choices = array();
@@ -70,7 +70,7 @@ class FieldInputCheckboxGroup extends Field
      * @param string $choices
      * @param string $label
      * @param array $value
-     * @return FieldInputCheckboxGroup
+     * @return InputCheckboxGroup
      */
     static function createInputCheckboxGroup($name, $choices, $label = '', $value = array())
     {

@@ -3,7 +3,7 @@ namespace Wa72\Formlib\Field;
 
 use Wa72\Formlib\ValidatorInterface;
 
-class FieldInputCheckbox extends Field
+class InputCheckbox extends Field
 {
     protected $checked = false;
     protected $type = 'checkbox';
@@ -119,7 +119,7 @@ class FieldInputCheckbox extends Field
      * @param string $label
      * @param string $value
      * @param bool $checked
-     * @return FieldInputCheckbox
+     * @return InputCheckbox
      */
     static function createInputCheckbox($name, $label, $value, $checked = false)
     {

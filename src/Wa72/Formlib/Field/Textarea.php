@@ -2,7 +2,7 @@
 namespace Wa72\Formlib\Field;
 use Wa72\Formlib\ValidatorMaxlength;
 
-class FieldTextarea extends Field
+class Textarea extends Field
 {
     protected $maxlength;
 
@@ -52,7 +52,7 @@ class FieldTextarea extends Field
      * Set the field data, used when binding the form to submitted data
      *
      * @param string $value
-     * @return \Wa72\Formlib\Field\FieldTextarea
+     * @return \Wa72\Formlib\Field\Textarea
      */
     public function setData($value)
     {
@@ -64,7 +64,7 @@ class FieldTextarea extends Field
      * @param string $name
      * @param string $label
      * @param string $value
-     * @return FieldTextarea
+     * @return Textarea
      */
     static function createTextarea($name, $label = '', $value = '')
     {

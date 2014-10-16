@@ -6,7 +6,7 @@ use Wa72\Formlib\ValidatorInterface;
 /**
  * This class represents a hidden field that combines a CSRF protection with a time-based spam protection
  */
-class FieldInputHiddenCsrfprotection extends FieldInputHidden
+class InputHiddenCsrfprotection extends InputHidden
 {
     const TIMEFRAME_VALID = 0;
     const TIMEFRAME_TOO_YOUNG = -1;

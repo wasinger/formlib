@@ -1,18 +1,18 @@
 <?php
 namespace Wa72\Formlib;
 use Symfony\Component\DomCrawler\Crawler;
-use Wa72\Formlib\Field\FieldInputCheckbox;
-use Wa72\Formlib\Field\FieldInputCheckboxGroup;
-use Wa72\Formlib\Field\FieldInputEmail;
-use Wa72\Formlib\Field\FieldInputHidden;
-use Wa72\Formlib\Field\FieldInputHiddenCsrfprotection;
-use Wa72\Formlib\Field\FieldInputNumber;
-use Wa72\Formlib\Field\FieldInputRadioGroup;
-use Wa72\Formlib\Field\FieldInputTel;
-use Wa72\Formlib\Field\FieldInputText;
-use Wa72\Formlib\Field\FieldInputUrl;
-use Wa72\Formlib\Field\FieldSelect;
-use Wa72\Formlib\Field\FieldTextarea;
+use Wa72\Formlib\Field\InputCheckbox;
+use Wa72\Formlib\Field\InputCheckboxGroup;
+use Wa72\Formlib\Field\InputEmail;
+use Wa72\Formlib\Field\InputHidden;
+use Wa72\Formlib\Field\InputHiddenCsrfprotection;
+use Wa72\Formlib\Field\InputNumber;
+use Wa72\Formlib\Field\InputRadioGroup;
+use Wa72\Formlib\Field\InputTel;
+use Wa72\Formlib\Field\InputText;
+use Wa72\Formlib\Field\InputUrl;
+use Wa72\Formlib\Field\Select;
+use Wa72\Formlib\Field\Textarea;
 
 /**
  * FormHandler handles a form through its complete lifecycle:
@@ -194,50 +194,50 @@ class FormHandler
                 case 'CheckboxGroup':
                 case 'checkboxgroup':
                     $choices = (isset($element['options']['multioptions']) ? $element['options']['multioptions'] : $element['choices']);
-                    $field = new FieldInputCheckboxGroup($elname, $choices, $label);
+                    $field = new InputCheckboxGroup($elname, $choices, $label);
                     break;
                 case 'radio':
                 case 'RadioGroup':
                 case 'radiogroup':
                     $choices = (isset($element['options']['multioptions']) ? $element['options']['multioptions'] : $element['choices']);
-                    $field = new FieldInputRadioGroup($elname, $choices, $label, $value);
+                    $field = new InputRadioGroup($elname, $choices, $label, $value);
                     break;
                 case 'select':
                     $choices = (isset($element['options']['multioptions']) ? $element['options']['multioptions'] : $element['choices']);
                     $add_empty_choice = (isset($element['add_empty_choice']) ? $element['add_empty_choice'] : null);
-                    $field = new FieldSelect($elname, $choices, $add_empty_choice, $label, $value);
+                    $field = new Select($elname, $choices, $add_empty_choice, $label, $value);
                     break;
                 case 'checkbox':
-                    $field = new FieldInputCheckbox($elname, $label, $value);
+                    $field = new InputCheckbox($elname, $label, $value);
                     if (isset($element['options']['unchecked_value'])) $field->setUncheckedValueForHumans($element['options']['unchecked_value']);
                     break;
                 case 'textarea':
-                    $field = new FieldTextarea($elname, $label, $value);
+                    $field = new Textarea($elname, $label, $value);
                     if (isset($element['options']['rows'])) $field->setAttribute('rows', $element['options']['rows']);
                     if (isset($element['options']['cols'])) $field->setAttribute('cols', $element['options']['cols']);
                     break;
                 case 'hidden':
-                    $field = new FieldInputHidden($elname, $value);
+                    $field = new InputHidden($elname, $value);
                     break;
                 case 'email':
-                    $field = new FieldInputEmail($elname, $label, $value, (isset($element['errormessage']) ? $element['errormessage'] : ''));
+                    $field = new InputEmail($elname, $label, $value, (isset($element['errormessage']) ? $element['errormessage'] : ''));
                     if (isset($element['options']['size'])) $field->setAttribute('size', $element['options']['size']);
                     break;
                 case 'tel':
-                    $field = new FieldInputTel($elname, $label, $value);
+                    $field = new InputTel($elname, $label, $value);
                     if (isset($element['options']['size'])) $field->setAttribute('size', $element['options']['size']);
                     break;
                 case 'number':
-                    $field = new FieldInputNumber($elname, $label, $value);
+                    $field = new InputNumber($elname, $label, $value);
                     if (isset($element['options']['size'])) $field->setAttribute('size', $element['options']['size']);
                     break;
                 case 'url':
-                    $field = new FieldInputUrl($elname, $label, $value);
+                    $field = new InputUrl($elname, $label, $value);
                     if (isset($element['options']['size'])) $field->setAttribute('size', $element['options']['size']);
                     break;
                 case 'text':
                 default:
-                    $field = new FieldInputText($elname, $label, $value);
+                    $field = new InputText($elname, $label, $value);
                     if (isset($element['options']['size'])) $field->setAttribute('size', $element['options']['size']);
             }
             $required = isset($element['required']) ? $element['required'] : (isset($element['options']['required']) ? $element['options']['required'] : false);
@@ -249,7 +249,7 @@ class FormHandler
         }
 
         // TODO: make CSRF protection configurable
-        $form->add(new FieldInputHiddenCsrfprotection());
+        $form->add(new InputHiddenCsrfprotection());
 
         if (isset($configarray['mail'])) $mc = $configarray['mail'];
         elseif (isset($configarray['options']['mail'])) $mc = $configarray['options']['mail'];

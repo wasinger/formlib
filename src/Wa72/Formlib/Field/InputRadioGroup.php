@@ -4,7 +4,7 @@ namespace Wa72\Formlib\Field;
 use Wa72\Formlib\ErrorMessages;
 use Wa72\Formlib\ValidatorInterface;
 
-class FieldInputRadioGroup extends Field
+class InputRadioGroup extends Field
 {
     protected $choices = array();
 
@@ -62,7 +62,7 @@ class FieldInputRadioGroup extends Field
      * @param string $choices
      * @param string $label
      * @param string $value
-     * @return FieldInputRadioGroup
+     * @return InputRadioGroup
      */
     static function createInputRadioGroup($name, $choices, $label = '', $value = '')
     {

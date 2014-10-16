@@ -3,7 +3,7 @@ namespace Wa72\Formlib\Field;
 
 use Wa72\Formlib\ValidatorEmail;
 
-class FieldInputEmail extends FieldInputText
+class InputEmail extends InputText
 {
     protected $type = 'email';
     protected $input_filter = FILTER_SANITIZE_EMAIL;
@@ -21,7 +21,7 @@ class FieldInputEmail extends FieldInputText
      * @param string $label
      * @param string $value
      * @param string $error_message
-     * @return FieldInputEmail
+     * @return InputEmail
      */
     static function createInputEmail($name, $label = '', $value = '', $error_message = '')
     {

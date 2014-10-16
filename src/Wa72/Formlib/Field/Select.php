@@ -4,7 +4,7 @@ namespace Wa72\Formlib\Field;
 use Wa72\Formlib\ErrorMessages;
 use Wa72\Formlib\ValidatorInterface;
 
-class FieldSelect extends Field
+class Select extends Field
 {
     protected $choices = array();
     protected $add_empty_choice = null;
@@ -77,7 +77,7 @@ class FieldSelect extends Field
      * @param null $add_empty_choice
      * @param string $label
      * @param string $value
-     * @return FieldSelect
+     * @return Select
      */
     static function createSelect($name, $choices, $add_empty_choice = null, $label = '', $value = '')
     {

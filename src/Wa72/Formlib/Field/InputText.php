@@ -4,7 +4,7 @@ namespace Wa72\Formlib\Field;
 use Wa72\Formlib\ValidatorMaxlength;
 use Wa72\Formlib\ValidatorPattern;
 
-class FieldInputText extends Field
+class InputText extends Field
 {
     protected $maxlength;
     protected $pattern;
@@ -63,7 +63,7 @@ class FieldInputText extends Field
      * @param string $errormessage
      * @param string $title
      * @param string $placeholder
-     * @return FieldInputText
+     * @return InputText
      */
     public function setPattern($pattern, $errormessage = '', $title = '', $placeholder = '')
     {
@@ -99,7 +99,7 @@ class FieldInputText extends Field
      * @param string $name
      * @param string $label
      * @param string $value
-     * @return FieldInputText
+     * @return InputText
      */
     static function createInputText($name, $label = '', $value = '')
     {

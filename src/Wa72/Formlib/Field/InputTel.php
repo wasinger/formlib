@@ -1,7 +1,7 @@
 <?php
 namespace Wa72\Formlib\Field;
 
-class FieldInputTel extends FieldInputText
+class InputTel extends InputText
 {
     protected $type = 'tel';
     protected $input_trim = true;
@@ -10,7 +10,7 @@ class FieldInputTel extends FieldInputText
      * @param string $name
      * @param string $label
      * @param string $value
-     * @return FieldInputTel
+     * @return InputTel
      */
     static function createInputTel($name, $label = '', $value = '')
     {

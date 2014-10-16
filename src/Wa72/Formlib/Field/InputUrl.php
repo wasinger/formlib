@@ -1,7 +1,7 @@
 <?php
 namespace Wa72\Formlib\Field;
 
-class FieldInputUrl extends FieldInputText
+class InputUrl extends InputText
 {
     protected $type = 'url';
     protected $input_trim = true;
@@ -10,7 +10,7 @@ class FieldInputUrl extends FieldInputText
      * @param string $name
      * @param string $label
      * @param string $value
-     * @return FieldInputUrl
+     * @return InputUrl
      */
     static function createInputUrl($name, $label = '', $value = '')
     {

@@ -2,7 +2,7 @@
 namespace Wa72\Formlib\Field;
 
 
-class FieldInputHidden extends Field
+class InputHidden extends Field
 {
     protected $include_in_data = false;
     protected $is_hidden = true;
@@ -39,7 +39,7 @@ class FieldInputHidden extends Field
     /**
      * @param $name
      * @param string $value
-     * @return FieldInputHidden
+     * @return InputHidden
      */
     static function createInputHidden($name, $value = '')
     {
