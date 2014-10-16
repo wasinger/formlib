@@ -54,11 +54,29 @@ $renderer->setForm($form);
 if (isset($_REQUEST['testform'])) {
     $form->bind($_REQUEST);
     if ($form->isValid()) {
-        echo $renderer->renderResult();
-        exit;
+        $rendered_form = $renderer->renderResult();
     }
 }
+if (!isset($rendered_form)) $rendered_form = $renderer->renderForm();
 
-echo $renderer->renderForm();
+?>
+<!doctype html>
+<html>
+    <head>
+        <title>Example form</title>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="//afarkas.github.com/webshim/js-webshim/minified/extras/modernizr-custom.js"></script>
+        <script src="//afarkas.github.com/webshim/js-webshim/minified/polyfiller.js"></script>
+        <script>
+            webshim.setOptions('forms', {
+                addValidators: true
+            });
+            webshims.polyfill('forms');
+        </script>
+    </head>
+    <body>
+    <?php echo $rendered_form ?>
+    </body>
+</html>
 
 

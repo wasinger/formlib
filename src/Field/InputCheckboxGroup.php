@@ -61,6 +61,12 @@ class InputCheckboxGroup extends Field
             $inel->setAttribute('type', 'checkbox');
             $inel->setAttribute('name', $this->getFullName() . '[]');
             if (in_array($value, $this->value)) $inel->setAttribute('checked', true);
+            // It's not possible in HTML5 to validate that at least one checkbox is checked.
+            // Webshim adds this feature using "data-grouprequired" attribute
+            // so we add it here.
+            // Webshim js must be included for this to work.
+            // See http://afarkas.github.io/webshim/demos/demos/forms.html#Custom-validity
+            if ($this->isRequired()) $inel->setAttribute('data-grouprequired', true);
         }
         return $domel;
     }
