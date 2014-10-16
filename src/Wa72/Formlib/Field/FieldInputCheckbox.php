@@ -1,5 +1,7 @@
 <?php
-namespace Wa72\Formlib;
+namespace Wa72\Formlib\Field;
+
+use Wa72\Formlib\ValidatorInterface;
 
 class FieldInputCheckbox extends Field
 {

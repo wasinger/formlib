@@ -1,5 +1,5 @@
 <?php
-namespace Wa72\Formlib;
+namespace Wa72\Formlib\Field;
 
 class FieldInputNumber extends FieldInputText
 {
@@ -9,7 +9,7 @@ class FieldInputNumber extends FieldInputText
      * @param string $name
      * @param string $label
      * @param string $value
-     * @return FieldInputText
+     * @return FieldInputNumber
      */
     static function createInputNumber($name, $label = '', $value = '')
     {

@@ -1,6 +1,7 @@
 <?php
 namespace Wa72\Formlib;
 
+use Wa72\Formlib\Field\Field;
 use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 /**
@@ -58,7 +59,7 @@ class Form
     /**
      * Add a field to the form
      *
-     * @param \Wa72\Formlib\Field $field
+     * @param \Wa72\Formlib\Field\Field $field
      * @return \Wa72\Formlib\Form self-reference for chaining
      */
     public function add(Field $field)

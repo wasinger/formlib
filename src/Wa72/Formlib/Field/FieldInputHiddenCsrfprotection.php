@@ -1,5 +1,8 @@
 <?php
-namespace Wa72\Formlib;
+namespace Wa72\Formlib\Field;
+use Wa72\Formlib\ErrorMessages;
+use Wa72\Formlib\ValidatorInterface;
+
 /**
  * This class represents a hidden field that combines a CSRF protection with a time-based spam protection
  */

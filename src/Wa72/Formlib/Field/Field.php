@@ -1,5 +1,8 @@
 <?php
-namespace Wa72\Formlib;
+namespace Wa72\Formlib\Field;
+use Wa72\Formlib\ValidatorInterface;
+use Wa72\Formlib\Form;
+use Wa72\Formlib\ValidatorRequired;
 
 /**
  * Field represents an input element or a group of input elements (such as radion buttons and check boxes) of an HTML form

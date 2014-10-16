@@ -1,6 +1,7 @@
 <?php
 namespace Wa72\Formlib;
 
+use Wa72\Formlib\Field\Field;
 use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 /**

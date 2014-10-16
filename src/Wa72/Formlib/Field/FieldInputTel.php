@@ -1,6 +1,5 @@
 <?php
-namespace Wa72\Formlib;
-
+namespace Wa72\Formlib\Field;
 
 class FieldInputTel extends FieldInputText
 {

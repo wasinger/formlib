@@ -1,5 +1,6 @@
 <?php
-namespace Wa72\Formlib;
+namespace Wa72\Formlib\Field;
+use Wa72\Formlib\ValidatorMaxlength;
 
 class FieldTextarea extends Field
 {
@@ -51,7 +52,7 @@ class FieldTextarea extends Field
      * Set the field data, used when binding the form to submitted data
      *
      * @param string $value
-     * @return \Wa72\Formlib\FieldTextarea
+     * @return \Wa72\Formlib\Field\FieldTextarea
      */
     public function setData($value)
     {

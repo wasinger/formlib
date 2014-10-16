@@ -1,5 +1,6 @@
 <?php
-namespace Wa72\Formlib;
+namespace Wa72\Formlib\Field;
+
 
 class FieldInputHidden extends Field
 {
@@ -35,6 +36,11 @@ class FieldInputHidden extends Field
         return $this->value;
     }
 
+    /**
+     * @param $name
+     * @param string $value
+     * @return FieldInputHidden
+     */
     static function createInputHidden($name, $value = '')
     {
         return new static($name, $value);

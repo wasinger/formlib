@@ -1,5 +1,8 @@
 <?php
-namespace Wa72\Formlib;
+namespace Wa72\Formlib\Field;
+
+use Wa72\Formlib\ValidatorMaxlength;
+use Wa72\Formlib\ValidatorPattern;
 
 class FieldInputText extends Field
 {
@@ -84,7 +87,7 @@ class FieldInputText extends Field
      * Set the field data, used when binding the form to submitted data
      *
      * @param string $value
-     * @return \Wa72\Formlib\Field
+     * @return \Wa72\Formlib\Field\Field
      */
     public function setData($value)
     {

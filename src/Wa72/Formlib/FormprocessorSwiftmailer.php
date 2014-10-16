@@ -1,5 +1,7 @@
 <?php
 namespace Wa72\Formlib;
+use Wa72\Formlib\Field\Field;
+
 /**
  * FormprocessorSwiftmailer sends the submitted form data by e-mail
  * using Swift_Mailer

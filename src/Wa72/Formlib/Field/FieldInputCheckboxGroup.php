@@ -1,24 +1,45 @@
 <?php
-namespace Wa72\Formlib;
+namespace Wa72\Formlib\Field;
 
-class FieldInputRadioGroup extends Field
+
+class FieldInputCheckboxGroup extends Field
 {
+    protected $value = array();
     protected $choices = array();
 
-    public function __construct($name, $choices, $label = '', $value = '')
+    /**
+     * @param string $name
+     * @param array $choices
+     * @param string $label
+     * @param array $value
+     * @throws \InvalidArgumentException
+     */
+    public function __construct($name, array $choices, $label = '', $value = array())
     {
         parent::__construct($name, $label, $value);
         if (!is_array($choices)) throw new \InvalidArgumentException('choices must be array');
         $this->choices = $choices;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getData($for_humans = false)
     {
-        if ($this->value !== '' && $for_humans) {
-            return $this->choices[$this->value];
+        if ($for_humans) {
+            $data = array();
+            if (count($this->value)) {
+                foreach ($this->value as $value) {
+                    $data[] = $this->choices[$value];
+                }
+            }
+            return $data;
         } else return $this->value;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getWidget()
     {
         $domdoc = $this->getDOMDocument();
@@ -26,8 +47,7 @@ class FieldInputRadioGroup extends Field
         foreach ($this->attributes as $name => $value) {
             $domel->setAttribute($name, $value);
         }
-        //$domel->setAttribute('name', $this->getFullName());
-        //$domel->setAttribute('id', $this->getId());
+        ;
 
         $i = 0;
         foreach ($this->choices as $value => $label) {
@@ -38,32 +58,23 @@ class FieldInputRadioGroup extends Field
             $label->setAttribute('for', $this->getId() . '_' . $i);
             $inel->setAttribute('id', $this->getId() . '_' . $i);
             $inel->setAttribute('value', $value);
-            $inel->setAttribute('type', 'radio');
-            $inel->setAttribute('name', $this->getFullName());
-            if ((string)$value == $this->value) $inel->setAttribute('checked', true);
+            $inel->setAttribute('type', 'checkbox');
+            $inel->setAttribute('name', $this->getFullName() . '[]');
+            if (in_array($value, $this->value)) $inel->setAttribute('checked', true);
         }
         return $domel;
-    }
-
-    public function validate()
-    {
-        parent::validate(); // calls registered additional validators, if any
-        if ((string) $this->value !== '' && !isset($this->choices[$this->value])) {
-            $this->validation_status = ValidatorInterface::STATUS_INVALID;
-            $this->error_messages[] = sprintf(ErrorMessages::$wrong_select_value, $this->value);
-        }
     }
 
     /**
      * @param string $name
      * @param string $choices
      * @param string $label
-     * @param string $value
-     * @return FieldInputRadioGroup
+     * @param array $value
+     * @return FieldInputCheckboxGroup
      */
-    static function createInputRadioGroup($name, $choices, $label = '', $value = '')
+    static function createInputCheckboxGroup($name, $choices, $label = '', $value = array())
     {
         return new static($name, $choices, $label, $value);
     }
-
 }
+

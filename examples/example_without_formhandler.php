@@ -1,5 +1,13 @@
 <?php
 namespace Wa72\Formlib;
+use Wa72\Formlib\Field\FieldInputCheckbox;
+use Wa72\Formlib\Field\FieldInputCheckboxGroup;
+use Wa72\Formlib\Field\FieldInputEmail;
+use Wa72\Formlib\Field\FieldInputRadioGroup;
+use Wa72\Formlib\Field\FieldInputText;
+use Wa72\Formlib\Field\FieldSelect;
+use Wa72\Formlib\Field\FieldTextarea;
+
 if (file_exists(__DIR__ . "/../vendor/autoload.php")) require __DIR__ . "/../vendor/autoload.php";
 else require __DIR__ . "/../../../../vendor/autoload.php";
 

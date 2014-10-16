@@ -1,6 +1,18 @@
 <?php
 namespace Wa72\Formlib;
 use Symfony\Component\DomCrawler\Crawler;
+use Wa72\Formlib\Field\FieldInputCheckbox;
+use Wa72\Formlib\Field\FieldInputCheckboxGroup;
+use Wa72\Formlib\Field\FieldInputEmail;
+use Wa72\Formlib\Field\FieldInputHidden;
+use Wa72\Formlib\Field\FieldInputHiddenCsrfprotection;
+use Wa72\Formlib\Field\FieldInputNumber;
+use Wa72\Formlib\Field\FieldInputRadioGroup;
+use Wa72\Formlib\Field\FieldInputTel;
+use Wa72\Formlib\Field\FieldInputText;
+use Wa72\Formlib\Field\FieldInputUrl;
+use Wa72\Formlib\Field\FieldSelect;
+use Wa72\Formlib\Field\FieldTextarea;
 
 /**
  * FormHandler handles a form through its complete lifecycle:
