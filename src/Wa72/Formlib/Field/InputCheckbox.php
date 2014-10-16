@@ -69,7 +69,7 @@ class InputCheckbox extends Field
 
     /**
      * @param boolean $checked
-     * @return \Wa72\Formlib\FieldInputCheckbox
+     * @return InputCheckbox
      */
     public function setChecked($checked)
     {

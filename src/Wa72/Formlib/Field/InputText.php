@@ -7,6 +7,7 @@ use Wa72\Formlib\ValidatorPattern;
 class InputText extends Field
 {
     protected $maxlength;
+    protected $minlength;
     protected $pattern;
     protected $type = 'text';
 
@@ -23,6 +24,7 @@ class InputText extends Field
         $domel->setAttribute('value', $this->value);
         if ($this->required) $domel->setAttribute('required', true);
         if ($this->maxlength) $domel->setAttribute('maxlength', $this->maxlength);
+        if ($this->minlength) $domel->setAttribute('minlength', $this->minlength);
         if ($this->pattern) $domel->setAttribute('pattern', $this->pattern);
 
         return $domel;
@@ -40,6 +42,22 @@ class InputText extends Field
             if (!isset($this->validators['maxlength'])) $this->setValidator('maxlength', new ValidatorMaxlength($maxlength, $errormessage));
         } else {
             $this->removeValidator('maxlength');
+        }
+        return $this;
+    }
+
+    public function getMinlength()
+    {
+        return $this->minlength;
+    }
+
+    public function setMinlength($minlength, $errormessage = '')
+    {
+        $this->minlength = $minlength;
+        if ($this->minlength) {
+            if (!isset($this->validators['minlength'])) $this->setValidator('minlength', new ValidatorMinlength($minlength, $errormessage));
+        } else {
+            $this->removeValidator('minlength');
         }
         return $this;
     }
@@ -87,7 +105,7 @@ class InputText extends Field
      * Set the field data, used when binding the form to submitted data
      *
      * @param string $value
-     * @return \Wa72\Formlib\Field\Field
+     * @return InputText
      */
     public function setData($value)
     {
