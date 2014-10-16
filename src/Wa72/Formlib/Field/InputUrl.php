@@ -5,6 +5,7 @@ class InputUrl extends InputText
 {
     protected $type = 'url';
     protected $input_trim = true;
+    protected $input_filter = FILTER_SANITIZE_URL;
 
     /**
      * @param string $name
