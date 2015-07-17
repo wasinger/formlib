@@ -30,6 +30,7 @@ class FormHandler
      */
     protected $mailer;
 
+    protected $is_validated = false;
     protected $is_valid = false;
     protected $is_processed = false;
 
@@ -127,8 +128,31 @@ class FormHandler
     public function bindAndValidateForm(array $data)
     {
         $this->form->bind($data);
+        $this->is_validated = true;
         $this->is_valid = $this->form->isValid();
         return $this->is_valid;
+    }
+
+    /**
+     * Get all validation error messages
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        if (!($this->is_validated)) throw new \LogicException('Form is not validated yet');
+        if ($this->is_valid) return array();
+        $fields = $this->form->getFields();
+        $field_errors = array();
+        foreach($fields as $name => $field) {
+            if ($field->getValidationStatus() === ValidatorInterface::STATUS_INVALID) {
+                $field_errors[$field->getFullName()] = $field->getErrorMessages();
+            }
+        }
+        return array(
+            'global_errors' => $this->form->getErrorMessages(),
+            'field_errors' => $field_errors
+        );
     }
 
     /**
