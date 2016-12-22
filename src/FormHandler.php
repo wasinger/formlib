@@ -69,8 +69,7 @@ class FormHandler
     public function createForm($name)
     {
         $this->form = new Form($name);
-        if (empty($this->renderer)) $this->renderer = new FormRendererGeneric();
-        $this->renderer->setForm($this->form);
+        if ($this->renderer instanceof FormRendererInterface) $this->renderer->setForm($this->form);
         return $this->form;
     }
 
@@ -85,7 +84,7 @@ class FormHandler
     }
 
     /**
-     * @return FormRendererGeneric
+     * @return FormRendererInterface
      */
     public function getRenderer()
     {
@@ -278,14 +277,14 @@ class FormHandler
         elseif (isset($configarray['options']['mail'])) $mc = $configarray['options']['mail'];
         if (isset($mc)) $this->registerProcessor(new FormprocessorSwiftmailer(FormprocessorMailConfiguration::fromArray($mc), $this->mailer));
 
-        if (isset($configarray['options']['text_pre'])) {
-            $this->renderer->content_before_form = $configarray['options']['text_pre'];
-        }
-
         if (isset($configarray['templatefile'])) {
             $this->setRenderer(new FormRendererFullformTemplate(file_get_contents($configarray['templatefile'])));
+        } else {
+            $this->setRenderer(new FormRendererGeneric());
+            if (isset($configarray['options']['text_pre'])) {
+                $this->renderer->content_before_form = $configarray['options']['text_pre'];
+            }
         }
-
         return $form;
     }
 
@@ -318,17 +317,18 @@ class FormHandler
         return $this->createFormFromArray($name, $configarray);
     }
 
-    public function createFromHtml($html)
-    {
-        $c = new Crawler($html);
-        $configarray = array();
-        $form = $c->selectButton($label_of_submitbutton)->form();
-        $formfields = $form->all();
-        foreach ($formfields as $formfield) {
-            if ($formfield instanceof \Symfony\Component\DomCrawler\Field\ChoiceFormField) {
-
-            }
-        }
-    }
+    // Future plans, code not working yet
+//    public function createFromHtml($html)
+//    {
+//        $c = new Crawler($html);
+//        $configarray = array();
+//        $form = $c->selectButton($label_of_submitbutton)->form();
+//        $formfields = $form->all();
+//        foreach ($formfields as $formfield) {
+//            if ($formfield instanceof \Symfony\Component\DomCrawler\Field\ChoiceFormField) {
+//
+//            }
+//        }
+//    }
 
 }
