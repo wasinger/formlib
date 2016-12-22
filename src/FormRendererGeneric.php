@@ -2,6 +2,9 @@
 namespace Wa72\Formlib;
 
 use Wa72\Formlib\Field\Field;
+use Wa72\Formlib\Field\InputCheckbox;
+use Wa72\Formlib\Field\InputCheckboxGroup;
+use Wa72\Formlib\Field\InputRadioGroup;
 use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 /**
@@ -93,18 +96,69 @@ class FormRendererGeneric implements FormRendererReturningRenderedFormInterface
      */
     public $label_wrap;
     /**
-     * HTML content to be wrapped around a field input widget
+     * HTML content to be wrapped around a field input widget (for text inputs and selects)
      *
      * @var string|\DOMElement|\Wa72\HtmlPageDom\HtmlPageCrawler
      */
     public $widget_wrap;
+
     /**
-     * The position of a field label relative to the input widget.
+     * CSS class name for label
+     *
+     * @var string
+     */
+    public $label_class;
+
+    /**
+     * CSS class name for input widget
+     *
+     * @var string
+     */
+    public $widget_class;
+
+    /**
+     * HTML content to be wrapped around checkboxes and radiobuttons
+     *
+     * @var string|\DOMElement|\Wa72\HtmlPageDom\HtmlPageCrawler
+     */
+    public $check_widget_wrap;
+
+    /**
+     * CSS class name for checkboxes and radiobuttons
+     *
+     * @var string
+     */
+    public $check_widget_class;
+
+    /**
+     * HTML content to be wrapped around a field label for checkboxes and radiobuttons
+     *
+     * @var string|\DOMElement|\Wa72\HtmlPageDom\HtmlPageCrawler
+     */
+    public $check_label_wrap;
+
+    /**
+     * CSS class name for label for checkboxes and radiobuttons
+     *
+     * @var string
+     */
+    public $check_label_class;
+
+    /**
+     * The position of a field label relative to the input widget (for text inputs and selects)
      * One of FormRenderer::POSITION_BEFORE_WIDGET, FormRenderer::POSITION_AFTER_WIDGET, FormRenderer::POSITION_AROUND_WIDGET
      *
      * @var int
      */
     public $label_position = self::POSITION_BEFORE_WIDGET;
+
+    /**
+     * The position of a field label relative to the input widget for checkboxes and radiobuttons.
+     * One of FormRenderer::POSITION_BEFORE_WIDGET, FormRenderer::POSITION_AFTER_WIDGET, FormRenderer::POSITION_AROUND_WIDGET
+     *
+     * @var int
+     */
+    public $check_label_position = self::POSITION_AROUND_WIDGET;
 
     const POSITION_BEFORE_WIDGET = 1;
     const POSITION_AFTER_WIDGET = 2;
@@ -163,7 +217,9 @@ class FormRendererGeneric implements FormRendererReturningRenderedFormInterface
         if (!empty($this->form_http_method)) $form->setAttribute('method', $this->form_http_method);
 
         // add submit button
-        if (!empty($this->buttons)) $form->append($this->buttons);
+        if (!empty($this->buttons)) {
+            $form->append($this->buttons);
+        };
 
         if ($this->form_wrap) {
             $form->wrap($this->form_wrap);
@@ -218,15 +274,50 @@ class FormRendererGeneric implements FormRendererReturningRenderedFormInterface
         if (count($errors)) {
             $errors = $this->renderFieldErrorMessages($errors);
         }
-        $row = HtmlPageCrawler::create('<div>')->append($widget);
-        if ($label)  {
-            if ($this->label_position == self::POSITION_BEFORE_WIDGET) $widget->before($label);
-            elseif ($this->label_position == self::POSITION_AFTER_WIDGET) $widget->after($label);
-            elseif ($this->label_position == self::POSITION_AROUND_WIDGET) $widget->wrap($label);
+        $row = HtmlPageCrawler::create('<div>');
+        if ($field instanceof InputCheckbox) {
+            $row->append($widget);
+            if ($label)  {
+                $row->append($label);
+                if ($this->check_label_position == self::POSITION_BEFORE_WIDGET) $widget->before($label);
+                elseif ($this->check_label_position == self::POSITION_AFTER_WIDGET) $widget->after($label);
+                elseif ($this->check_label_position == self::POSITION_AROUND_WIDGET) $label->prepend(' ')->prepend($widget);
+            }
+            if ($this->check_widget_wrap) {
+                $widget->wrap($this->check_widget_wrap);
+            }
+            if ($this->check_widget_class) {
+                $widget->addClass($this->check_widget_class);
+            }
+            if ($label && $this->check_label_wrap) {
+                $label->wrap($this->check_label_wrap);
+            }
+            if ($label && $this->check_label_class) {
+                $label->addClass($this->check_label_class);
+            }
+        } else {
+            $row->append($widget);
+            if ($label)  {
+                if ($this->label_position == self::POSITION_BEFORE_WIDGET) $widget->before($label);
+                elseif ($this->label_position == self::POSITION_AFTER_WIDGET) $widget->after($label);
+                elseif ($this->label_position == self::POSITION_AROUND_WIDGET) $widget->wrap($label);
+            }
+            if ($this->widget_wrap) {
+                $widget->wrap($this->widget_wrap);
+            }
+            if ($this->widget_class) {
+                $widget->addClass($this->widget_class);
+            }
+            if ($label && $this->label_wrap) {
+                $label->wrap($this->label_wrap);
+            }
+            if ($label && $this->label_class) {
+                $label->addClass($this->label_class);
+            }
         }
-        if ($this->widget_wrap) $widget->wrap($this->widget_wrap);
-        if ($errors) $widget->before($errors);
-        if ($label && $this->label_wrap) $label->wrap($this->label_wrap);
+        if ($errors) {
+            $row->prepend($errors);
+        }
         if ($this->row_wrap) $row->wrapInner($this->row_wrap);
         return $row->children();
     }
