@@ -84,14 +84,15 @@ class FormprocessorSwiftmailer implements FormprocessorInterface
 
         $result = $this->mailer->send($message, $this->failed_recipients);
         if ($result > 0 && $result >= count(array_keys($message->getTo()))) {
-            $this->logger->info('Form {form} sent to {recipients}',
-                array('form' => $form->getName(), 'recipients' => join(', ', array_keys($message->getTo()))));
+            $this->logger->info(sprintf('Form %s sent to %s',
+                $form->getName(),
+                join(', ', array_keys($message->getTo()))
+            ));
         } else {
-            $this->logger->error('error while sending form {form} to {recipients}',
-                array('form' => $form->getName(), 'recipients' => join(', ', $this->failed_recipients))
-            );
-            //if ($this->transporterrorlogger instanceof Zend_Log) $this->transporterrorlogger->err("Mail transport error:\n\n" . $logger->dump());
-            //if ($this->messagelogger instanceof Zend_Log) $this->messagelogger->err("Failed Message:\n\n" . $message->toString());
+            $this->logger->error(sprintf('error while sending form %s to %s',
+                $form->getName(),
+                join(', ', $this->failed_recipients)
+            ));
         }
 
         if ($mo->copy_to_sender) {
@@ -109,13 +110,15 @@ class FormprocessorSwiftmailer implements FormprocessorInterface
                 if ($mo->from) $message->setFrom($mo->from);
                 $result = $this->mailer->send($message);
                 if ($result > 0) {
-                    $this->logger->info('Copy of Form {form} sent to sender {sender}',
-                        array('form' => $form->getName(), 'sender' => join(', ', array_keys($message->getTo()))));
+                    $this->logger->info(sprintf('Copy of Form %s sent to sender %s',
+                        $form->getName(),
+                        join(', ', array_keys($message->getTo()))
+                    ));
                 } else {
-                    $this->logger->warning('Error while sending copy of form {form} to sender {sender}',
-                        array('form' => $form->getName(), 'sender' => join(', ', array_keys($message->getTo()))));
-                    //if ($this->transporterrorlogger instanceof Zend_Log) $this->transporterrorlogger->err("Mail transport error:\n\n" . $logger->dump());
-                    //if ($this->messagelogger instanceof Zend_Log) $this->messagelogger->err("Failed Message:\n\n" . $message->toString());
+                    $this->logger->warning(sprintf('Error while sending copy of form %s to sender %s',
+                        $form->getName(),
+                        join(', ', array_keys($message->getTo()))
+                    ));
                 }
             }
         }

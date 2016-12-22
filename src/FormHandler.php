@@ -164,12 +164,11 @@ class FormHandler
     public function processForm()
     {
         if (!($this->is_valid)) throw new \LogicException('Form must be valid before processing');
-        $this->logger->info('Form {form} on page {url} submitted from IP address {ip} using {ua}',
-            array(
-                'form' => $this->form->getName(),
-                'url' => $_SERVER['REQUEST_URI'],
-                'ip' => $_SERVER['REMOTE_ADDR'],
-                'ua' => $_SERVER['HTTP_USER_AGENT']
+        $this->logger->info(sprintf('Form %s on page %s submitted from IP address %s using %s',
+            $this->form->getName(),
+            $_SERVER['REQUEST_URI'],
+            $_SERVER['REMOTE_ADDR'],
+            $_SERVER['HTTP_USER_AGENT']
             )
         );
         if (!count($this->processors)) throw new \LogicException('No Formprocessors registered');
