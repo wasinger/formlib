@@ -6,7 +6,7 @@
     },
     "require": {
         "php": ">=5.3.6",
-        "swiftmailer/swiftmailer": "~4.0,~5.0",
+        "swiftmailer/swiftmailer": "~4.0|~5.0",
         "psr/log": "1.*",
         "symfony/yaml": "*",
         "wa72/htmlpagedom": "*@dev"
