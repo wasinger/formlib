@@ -302,7 +302,7 @@ class FormHandler
         if (!class_exists('Symfony\\Component\\Yaml\\Yaml')) throw new \RuntimeException('package symfony/yaml not installed');
         if (!file_exists($ymlfile)) throw new \InvalidArgumentException('Form configuration file ' . $ymlfile . ' does not exist');
         if (!is_readable($ymlfile)) throw new \InvalidArgumentException('Form configuration file ' . $ymlfile . ' is not readable');
-        $configarray = \Symfony\Component\Yaml\Yaml::parse($ymlfile);
+        $configarray = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($ymlfile));
         if (isset($configarray['form'])) $configarray = $configarray['form'];
         $name = (isset($configarray['id']) ? $configarray['id'] : (isset($configarray['name']) ? $configarray['name'] : basename($ymlfile, '.yml')));
 
