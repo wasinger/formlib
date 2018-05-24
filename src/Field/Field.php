@@ -17,7 +17,7 @@ abstract class Field
     /**
      * @var array Associative name=>value array for additional html attributes of this field
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
     /**
      * @var boolean
@@ -33,7 +33,7 @@ abstract class Field
     /**
      * @var ValidatorInterface[]
      */
-    protected $validators;
+    protected $validators = [];
 
     /**
      * @var int One of ValidatorInterface::STATUS_NOT_VALIDATED, ValidatorInterface::STATUS_INVALID,ValidatorInterface::STATUS_VALID
@@ -43,7 +43,7 @@ abstract class Field
     /**
      * @var string[]
      */
-    protected $error_messages;
+    protected $error_messages = [];
 
     /**
      * Whether this field should be included when displaying or mailing submitted data
