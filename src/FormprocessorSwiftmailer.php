@@ -83,7 +83,7 @@ class FormprocessorSwiftmailer implements FormprocessorInterface
         //$this->mailer->registerPlugin(new \Swift_Plugins_LoggerPlugin($logger));
 
         $result = $this->mailer->send($message, $this->failed_recipients);
-        if ($result > 0 && $result >= count(array_keys($message->getTo()))) {
+        if ($result > 0) {
             $this->logger->info(sprintf('Form %s sent to %s',
                 $form->getName(),
                 join(', ', array_keys($message->getTo()))
