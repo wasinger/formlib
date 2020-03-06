@@ -133,12 +133,12 @@ class FormRendererFullformTemplate implements FormRendererReturningRenderedFormI
             $widget = $field->getDataWidget(true);
             $widget = $t->getDOMDocument()->importNode($widget, true);
             $id = $widget->getAttribute('id');
-            $wt = $t->filterXPath('descendant-or-self::*[@id = \'' . $id . '\']')->getFirstNode();
+            $wt = $t->filterXPath('descendant-or-self::*[@id = \'' . $id . '\']')->getNode(0);
             if ($wt instanceof \DOMElement) {
                 $wt->parentNode->replaceChild($widget, $wt);
             } else { // element with full id (formname_fieldname) not found in template, try short id (fieldname)
                 $id = $field->getName();
-                $wt = $t->filterXPath('descendant-or-self::*[@id = \'' . $id . '\']')->getFirstNode();
+                $wt = $t->filterXPath('descendant-or-self::*[@id = \'' . $id . '\']')->getNode(0);
                 if ($wt instanceof \DOMElement) {
                     $wt->parentNode->replaceChild($widget, $wt);
                 }
