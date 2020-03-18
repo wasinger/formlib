@@ -1,6 +1,7 @@
 <?php
 namespace Wa72\Formlib;
 use Wa72\Formlib\Field\Field;
+use Wa72\Formlib\Field\Heading;
 
 /**
  * FormprocessorSwiftmailer sends the submitted form data by e-mail
@@ -52,7 +53,7 @@ class FormprocessorSwiftmailer implements FormprocessorInterface
      */
     public function processForm(Form $form)
     {
-        $data = $form->getData(true);
+        $data = $form->getDataWithLabels();
         $text = $this->render_results($data);
 
         $this->failed_recipients = array();
@@ -126,16 +127,26 @@ class FormprocessorSwiftmailer implements FormprocessorInterface
     }
 
     /**
-     * @param array $data Associative Array $label => $value
+     * @param array $data Associative Array $name => ['label' => $label, 'value' => $value, 'class' => $class]
      * @return string
      */
     protected function render_results($data)
     {
         $s = '';
-        foreach ($data as $label => $value) {
-            if (is_array($value)) $value = join(', ', $value);
-            $s .= "\n" . $label . ":\n";
-            $s .= $value . "\n";
+        foreach ($data as $name => $fd) {
+            $value = $fd['value'];
+            $label = $fd['label'];
+            $class = $fd['class'];
+            if ($class == Heading::class) {
+                $s .= "\n\n" . \strtoupper($value) . "\n";
+            } else {
+
+                if (is_array($value)) {
+                    $value = join(', ', $value);
+                }
+                $s .= "\n" . $label . ":\n";
+                $s .= $value . "\n";
+            }
         }
         return $s;
     }

@@ -1,6 +1,7 @@
 <?php
 namespace Wa72\Formlib;
 use Symfony\Component\DomCrawler\Crawler;
+use Wa72\Formlib\Field\Heading;
 use Wa72\Formlib\Field\InputCheckbox;
 use Wa72\Formlib\Field\InputCheckboxGroup;
 use Wa72\Formlib\Field\InputEmail;
@@ -257,6 +258,9 @@ class FormHandler
                     $field = new InputUrl($elname, $label, $value);
                     if (isset($element['options']['size'])) $field->setAttribute('size', $element['options']['size']);
                     break;
+                case 'heading':
+                    $field = new Heading($elname, $label);
+                    break;
                 case 'text':
                 default:
                     $field = new InputText($elname, $label, $value);
@@ -272,6 +276,7 @@ class FormHandler
 
         // TODO: make CSRF protection configurable
         $form->add(new InputHiddenCsrfprotection());
+
 
         if (isset($configarray['mail'])) $mc = $configarray['mail'];
         elseif (isset($configarray['options']['mail'])) $mc = $configarray['options']['mail'];

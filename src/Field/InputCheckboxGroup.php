@@ -30,7 +30,7 @@ class InputCheckboxGroup extends Field
             $data = array();
             if (count($this->value)) {
                 foreach ($this->value as $value) {
-                    $data[] = $this->choices[$value];
+                    $data[] = (isset($this->choices[$value]) ? $this->choices[$value] : $value);
                 }
             }
             return $data;

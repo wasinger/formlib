@@ -17,7 +17,7 @@ class InputRadioGroup extends Field
 
     public function getData($for_humans = false)
     {
-        if ($this->value !== '' && $for_humans) {
+        if ($this->value !== '' && $for_humans && isset($this->choices[$this->value])) {
             return $this->choices[$this->value];
         } else return $this->value;
     }

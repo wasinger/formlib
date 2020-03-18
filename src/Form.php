@@ -148,6 +148,20 @@ class Form
         return $data;
     }
 
+    public function getDataWithLabels()
+    {
+        $data = array();
+        foreach ($this->fields as $name => $field) {
+        if (!$field->getIncludeInData()) continue;
+            $data[$name] = [
+                'value' => $field->getData(true),
+                'label' => ($field->getLabel() ?: $name),
+                'class' => \get_class($field)
+            ];
+        }
+        return $data;
+    }
+
     /**
      * Get global error messages
      *
