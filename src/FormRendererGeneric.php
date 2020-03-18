@@ -2,6 +2,7 @@
 namespace Wa72\Formlib;
 
 use Wa72\Formlib\Field\Field;
+use Wa72\Formlib\Field\Heading;
 use Wa72\Formlib\Field\InputCheckbox;
 use Wa72\Formlib\Field\InputCheckboxGroup;
 use Wa72\Formlib\Field\InputRadioGroup;
@@ -277,11 +278,15 @@ class FormRendererGeneric implements FormRendererReturningRenderedFormInterface
         $row = HtmlPageCrawler::create('<div>');
         if ($field instanceof InputCheckbox) {
             $row->append($widget);
-            if ($label)  {
+            if ($label) {
                 $row->append($label);
-                if ($this->check_label_position == self::POSITION_BEFORE_WIDGET) $widget->before($label);
-                elseif ($this->check_label_position == self::POSITION_AFTER_WIDGET) $widget->after($label);
-                elseif ($this->check_label_position == self::POSITION_AROUND_WIDGET) $label->prepend(' ')->prepend($widget);
+                if ($this->check_label_position == self::POSITION_BEFORE_WIDGET) {
+                    $widget->before($label);
+                } elseif ($this->check_label_position == self::POSITION_AFTER_WIDGET) {
+                    $widget->after($label);
+                } elseif ($this->check_label_position == self::POSITION_AROUND_WIDGET) {
+                    $label->prepend(' ')->prepend($widget);
+                }
             }
             if ($this->check_widget_wrap) {
                 $widget->wrap($this->check_widget_wrap);
@@ -295,6 +300,24 @@ class FormRendererGeneric implements FormRendererReturningRenderedFormInterface
             if ($label && $this->check_label_class) {
                 $label->addClass($this->check_label_class);
             }
+        } elseif ($field instanceof InputRadioGroup) {
+            $row->append($widget);
+            $widget->filter('li')->addClass('form-check')->addClass('form-check-inline');
+            $widget->filter('input')->addClass('form-check-input');
+            $widget->filter('label')->addClass('form-check-label');
+            if ($label) $widget->before($label);
+            if ($this->widget_wrap) {
+                $widget->wrap($this->widget_wrap);
+            }
+            if ($label && $this->label_wrap) {
+                $label->wrap($this->label_wrap);
+            }
+            if ($label && $this->label_class) {
+                $label->addClass($this->label_class);
+            }
+        } elseif ($field instanceof Heading) {
+            $row->append($widget);
+            $widget->wrap('<div class="col-12"></div>');
         } else {
             $row->append($widget);
             if ($label)  {

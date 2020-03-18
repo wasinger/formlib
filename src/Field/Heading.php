@@ -10,7 +10,7 @@ class Heading extends Field
     private $text;
     private $tag;
 
-    public function __construct($name, $text, $tag = 'h3')
+    public function __construct($name, $text, $tag = 'h2')
     {
         $this->name = $name;
         $this->text = $text;
