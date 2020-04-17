@@ -66,7 +66,7 @@ class FormprocessorSwiftmailer implements FormprocessorInterface
             $from = $mo->from;
         }
 
-        $message = \Swift_Message::newInstance();
+        $message = new \Swift_Message;
         $message->setSubject($mo->subject)
             ->setTo($mo->to)
             ->setBody($mo->text_pre . $text .$mo->text_post);
@@ -104,7 +104,7 @@ class FormprocessorSwiftmailer implements FormprocessorInterface
                 $to = null;
             }
             if ($to) {
-                $message = \Swift_Message::newInstance();
+                $message = new \Swift_Message();
                 $message->setSubject($mo->subject)
                     ->setTo($to)
                     ->setBody($mo->text_pre_sender . $text . $mo->text_post_sender);
