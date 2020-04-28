@@ -59,19 +59,15 @@ class FormprocessorSwiftmailer implements FormprocessorInterface
         $this->failed_recipients = array();
         $mo = $this->configuration;
 
-        $fromfield = $mo->senderfield;
-        if ($fromfield && $form->get($fromfield) instanceof Field && $form->get($fromfield)->getData()) {
-            $from = $form->get($fromfield)->getData();
-        } else {
-            $from = $mo->from;
-        }
-
         $message = new \Swift_Message;
         $message->setSubject($mo->subject)
             ->setTo($mo->to)
+            ->setFrom($mo->from)
             ->setBody($mo->text_pre . $text .$mo->text_post);
-        if ($from) $message->setFrom($from);
-        if ($from && $from != $mo->from) $message->addReplyTo($from);
+        $replyfield = $mo->senderfield;
+        if ($replyfield && $form->get($replyfield) instanceof Field && $form->get($replyfield)->getData()) {
+            $message->addReplyTo($form->get($replyfield)->getData());
+        }
         if ($mo->bcc) {
             $message->setBcc($mo->bcc);
         }
