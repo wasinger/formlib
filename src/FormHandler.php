@@ -50,9 +50,13 @@ class FormHandler
      */
     protected $renderer;
 
-    public function __construct(\Psr\Log\LoggerInterface $logger = null, \Swift_Mailer $mailer = null)
+    public function __construct(\Psr\Log\LoggerInterface $logger = null)
     {
         $this->logger = $logger;
+    }
+
+    public function setMailer(\Swift_Mailer $mailer): void
+    {
         $this->mailer = $mailer;
     }
 

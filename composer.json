@@ -6,10 +6,12 @@
     },
     "require": {
         "php": ">=5.3.6",
-        "swiftmailer/swiftmailer": "^6",
         "psr/log": "^1",
         "symfony/yaml": "*",
         "wa72/htmlpagedom": "*@dev"
+    },
+    "suggest": {
+        "swiftmailer/swiftmailer": "^6"
     },
     "require-dev": {
         "wa72/simplelogger": "dev-master"
